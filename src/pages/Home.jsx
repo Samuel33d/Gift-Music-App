@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TrackList from "../components/shared/TrackList";
 import PrincipalLayout from "../layouts/PrincipalLayout";
 import { SearchIcon } from "../svg/Svgs";
 import { axiosMusic } from "../utils/configAxios";
 import { IconLoader2 } from "@tabler/icons-react";
 
-const Home = ({ tracksRecommendations }) => {
+const Home = ({  }) => {
   const [searchTrack, setSearchTrack] = useState([]);
+
+  const [tracksRecommendations, setTracksRecommendations] = useState([]);
+
+  useEffect(() => {
+    axiosMusic
+      .get("/api/tracks/recommendations?seed_genres=reggaeton,salsa,latino")
+      .then(({ data }) => setTracksRecommendations(data.tracks))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,13 +60,9 @@ const Home = ({ tracksRecommendations }) => {
           <option value="12">12</option>
         </select>
       </form>
-      {tracksRecommendations.length > 0 && (
-        <TrackList
-          tracks={
-            searchTrack.length === 0 ? tracksRecommendations : searchTrack
-          }
-        />
-      )}
+      <TrackList
+        tracks={searchTrack.length === 0 ? tracksRecommendations : searchTrack}
+      />
     </PrincipalLayout>
   );
 };

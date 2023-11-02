@@ -1,5 +1,5 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import PrivateRoutes from "./auth/PrivateRoutes";
 import ArtistDetail from "./pages/ArtistDetail";
 import Home from "./pages/Home";
@@ -10,18 +10,9 @@ import PlaylistPublic from "./pages/PlaylistPublic";
 import Playlists from "./pages/Playlists";
 import Register from "./pages/Register";
 import TrackDetails from "./pages/TrackDetails";
-import { useEffect, useState } from "react";
-import { axiosMusic } from "./utils/configAxios";
 
 function App() {
-  const [tracksRecommendations, setTracksRecommendations] = useState([]);
 
-  useEffect(() => {
-    axiosMusic
-      .get("/api/tracks/recommendations?seed_genres=reggaeton,salsa,latino")
-      .then(({ data }) => setTracksRecommendations(data.tracks))
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <main>
@@ -33,7 +24,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route
             path="/"
-            element={<Home tracksRecommendations={tracksRecommendations} />}
+            element={<Home />}
           />
           <Route path="/tracks/:id" element={<TrackDetails />} />
           <Route path="/artists/:id" element={<ArtistDetail />} />
