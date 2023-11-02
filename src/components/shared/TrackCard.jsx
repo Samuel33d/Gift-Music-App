@@ -33,7 +33,14 @@ const TrackCard = ({
           className={` sm:text-base flex gap-3  justify-between items-center w-full text-[0.8rem] sm:hover:bg-white/10 transition-all   p-1 rounded-md ${trackScale} sm:hover:shadow-md px-2`}
         >
           <div className={`rounded-lg overflow-hidden ${trackImgSize}`}>
-            <img src={track?.album.images[2].url} alt="" />
+            <img
+              src={
+                track?.album.images.length === 0
+                  ? "https://thumbs.dreamstime.com/t/cantante-cl%C3%A1sico-desconocido-que-canta-en-estudio-117106986.jpg"
+                  : track?.album.images[2].url
+              }
+              alt=""
+            />
           </div>
           <div className="flex-1 grid gap-0 sm:gap-1">
             <Link

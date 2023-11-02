@@ -11,7 +11,7 @@ import { Pagination } from "swiper/modules";
 
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
-
+  console.log(artist);
   const { id } = useParams();
 
   const topSongs = artist?.songsTop;
@@ -41,7 +41,11 @@ const ArtistDetail = () => {
             <img
               className=" rounded-[100%] overflow-hidden 
               shadow-full h-[192px] w-[192px] sm:h-[200px] sm:w-[200px] object-cover shadow-black "
-              src={artist?.images[1].url}
+              src={
+                artist?.images.length === 0
+                  ? "https://thumbs.dreamstime.com/t/cantante-cl%C3%A1sico-desconocido-que-canta-en-estudio-117106986.jpg"
+                  : artist?.images[2].url
+              }
               alt=""
             />
           </div>
