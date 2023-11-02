@@ -51,9 +51,13 @@ const Home = ({ tracksRecommendations }) => {
           <option value="12">12</option>
         </select>
       </form>
-      <TrackList
-        tracks={searchTrack.length === 0 ? tracksRecommendations : searchTrack}
-      />
+      {tracksRecommendations.length > 0 && (
+        <TrackList
+          tracks={
+            searchTrack.length === 0 ? tracksRecommendations : searchTrack
+          }
+        />
+      )}
     </PrincipalLayout>
   );
 };
