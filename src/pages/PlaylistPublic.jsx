@@ -1,6 +1,6 @@
 import { Icon360, IconPlus, IconShare } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import PlaySpotify from "../components/shared/PlaySpotify";
 import TrackCard from "../components/shared/TrackCard";
@@ -109,12 +109,13 @@ const PlaylistPublic = () => {
             >
               No
             </button>
-            <button
+            <Link
+              to={"/"}
               target="_blank"
               className="font-semibold text-md uppercase py-2 px-3 rounded-full border-2 hover:text-secondary hover:border-secondary transition-all "
             >
               Sí, crear cuenta
-            </button>
+            </Link>
           </div>
         </div>
       </div>
