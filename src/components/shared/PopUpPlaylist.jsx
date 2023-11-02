@@ -55,7 +55,7 @@ const PopUpPlaylist = ({ isPopUpPlaylistShow, setIsPopUpPlaylistShow }) => {
       } transition-all duration-200`}
     >
       <div className={`relative cassette ${isShowFront ? "front" : "back"}`}>
-        <div className="front">
+        <div className="front ">
           <img src="/cassette.png" alt="" />
           <div className="text-black bg-white rounded-md flex p-1 items-center absolute top-[15px] left-[20px] w-[198px] gap-1 text-sm font-semibold">
             <input
@@ -90,7 +90,9 @@ const PopUpPlaylist = ({ isPopUpPlaylistShow, setIsPopUpPlaylistShow }) => {
               <IconPencil />
             </label>
             <textarea
-              className="absolute top-10 resize-none rounded-md p-1 outline-none w-full left-0 px-2"
+              className={`${
+                isShowFront ? "opacity-0" : "opacity-100"
+              } absolute top-10 resize-none rounded-md p-1 outline-none w-full left-0 px-2  transition-all delay-200`}
               placeholder="Mensaje"
               rows={4}
               id="message"

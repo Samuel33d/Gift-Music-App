@@ -172,7 +172,9 @@ const PlaylistDetail = () => {
                 <IconPencil />
               </label>
               <textarea
-                className="absolute top-10 resize-none rounded-md p-1 outline-none w-full left-0 px-2"
+                className={`${
+                  isShowFront ? "opacity-0" : "opacity-100"
+                }  absolute top-10 resize-none rounded-md p-1 outline-none w-full left-0 px-2 transition-all delay-200`}
                 placeholder="Mensaje"
                 rows={4}
                 id="message"
