@@ -19,7 +19,6 @@ const TrackCard = ({
   trackScale = "sm:hover:scale-105",
 }) => {
   const dispatch = useDispatch();
-
   const handleAddTrack = () => {
     dispatch(addTrack(track));
   };

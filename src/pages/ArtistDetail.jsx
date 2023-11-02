@@ -11,6 +11,7 @@ import { Pagination } from "swiper/modules";
 
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
+
   const { id } = useParams();
 
   const topSongs = artist?.songsTop;

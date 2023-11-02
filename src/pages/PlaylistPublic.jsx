@@ -1,6 +1,6 @@
 import { Icon360, IconPlus, IconShare } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import PlaySpotify from "../components/shared/PlaySpotify";
 import TrackCard from "../components/shared/TrackCard";
@@ -12,7 +12,10 @@ const PlaylistPublic = () => {
   const [isShowFront, setIsShowFront] = useState(true);
   const [trackToPlay, setTrackToPlay] = useState("");
   const [isShowModal, setIsShowModal] = useState(false);
+  const navigate = useNavigate();
   const { id } = useParams();
+
+  const token = JSON.parse(localStorage.getItem("userInfo")).token;
 
   useEffect(() => {
     axiosMusic
@@ -26,6 +29,14 @@ const PlaylistPublic = () => {
     navigator.clipboard.writeText(currentUrl).then(() => {
       toast("Copiado en el portapapeles");
     });
+  };
+
+  const handleClick = () => {
+    if (token) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -109,13 +120,13 @@ const PlaylistPublic = () => {
             >
               No
             </button>
-            <Link
-              to={"/register"}
+            <button
+              onClick={handleClick}
               target="_blank"
               className="font-semibold text-md uppercase py-2 px-3 rounded-full border-2 hover:text-secondary hover:border-secondary transition-all "
             >
               Sí, crear cuenta
-            </Link>
+            </button>
           </div>
         </div>
       </div>

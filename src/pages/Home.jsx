@@ -7,7 +7,6 @@ import { IconLoader2 } from "@tabler/icons-react";
 
 const Home = () => {
   const [searchTrack, setSearchTrack] = useState([]);
-
   const [tracksRecommendations, setTracksRecommendations] = useState([]);
 
   useEffect(() => {
@@ -55,12 +54,14 @@ const Home = () => {
           required
           className="bg-transparent outline-none [&>option]:text-black"
         >
+          <option value="10">Songs</option>
           <option value="5">5</option>
           <option value="7">7</option>
           <option value="10">10</option>
           <option value="12">12</option>
         </select>
       </form>
+
       <TrackList
         tracks={searchTrack.length === 0 ? tracksRecommendations : searchTrack}
       />
