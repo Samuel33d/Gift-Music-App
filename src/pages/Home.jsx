@@ -5,7 +5,7 @@ import { SearchIcon } from "../svg/Svgs";
 import { axiosMusic } from "../utils/configAxios";
 import { IconLoader2 } from "@tabler/icons-react";
 
-const Home = ({  }) => {
+const Home = () => {
   const [searchTrack, setSearchTrack] = useState([]);
 
   const [tracksRecommendations, setTracksRecommendations] = useState([]);
@@ -38,7 +38,9 @@ const Home = ({  }) => {
         {tracksRecommendations.length === 0 ? (
           <IconLoader2 className="absolute animate-spin  " />
         ) : (
-          <SearchIcon />
+          <button type="submit">
+            <SearchIcon />
+          </button>
         )}
         <input
           className="flex-1 bg-transparent outline-none"
@@ -53,7 +55,6 @@ const Home = ({  }) => {
           required
           className="bg-transparent outline-none [&>option]:text-black"
         >
-          <option value="10">Default</option>
           <option value="5">5</option>
           <option value="7">7</option>
           <option value="10">10</option>
