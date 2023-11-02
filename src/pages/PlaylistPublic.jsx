@@ -60,14 +60,13 @@ const PlaylistPublic = () => {
             <img src="/cassette.png" alt="" />
             <div className="text-black bg-white rounded-md flex p-1 items-center absolute top-[15px] left-[20px] w-[198px] gap-1 text-sm font-bold">
               <span>{playlist?.to}</span>
-              <textarea
-                disabled
-                className={` ${
+              <p
+                className={`${
                   isShowFront ? "opacity-0" : "opacity-100"
-                }  absolute top-10 resize-none rounded-md p-1 outline-none w-full left-0 px-2 h-[100px] bg-white overflow-y-auto transition-all delay-200`}
+                }  absolute top-10 rounded-md p-1 outline-none w-full left-0 px-2 h-[100px] bg-white overflow-y-auto transition-all delay-200`}
               >
                 {playlist?.message}
-              </textarea>
+              </p>
             </div>
           </div>
         </div>
