@@ -48,6 +48,7 @@ const Home = () => {
           size={10}
           required
           autoComplete="off"
+          placeholder="Search song or artist"
         />
         <select
           name="limit"
