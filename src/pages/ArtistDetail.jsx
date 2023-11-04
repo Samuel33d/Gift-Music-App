@@ -8,10 +8,11 @@ import PrincipalLayout from "../layouts/PrincipalLayout";
 import { HeartEmpty, HeartFill } from "../svg/Svgs";
 import { axiosMusic } from "../utils/configAxios";
 import { Pagination } from "swiper/modules";
+import PlaySpotify from "../components/shared/PlaySpotify";
 
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
-  console.log(artist);
+  const [trackToPlay, setTrackToPlay] = useState("");
   const { id } = useParams();
 
   const topSongs = artist?.songsTop;
@@ -23,6 +24,8 @@ const ArtistDetail = () => {
       .then(({ data }) => setArtist(data))
       .catch((err) => console.log(err));
   }, [id]);
+
+
 
   return (
     <PrincipalLayout>
@@ -37,10 +40,10 @@ const ArtistDetail = () => {
           >
             {"< Atrás"}
           </Link>
-          <div className="link   flex items-center  justify-center mx-auto relative">
+          <div className="link   flex items-center  justify-center mx-auto relative ">
             <img
               className=" rounded-[100%] overflow-hidden 
-              shadow-full h-[192px] w-[192px] sm:h-[200px] sm:w-[200px] object-cover shadow-black "
+              shadow-full h-[192px] w-[192px] sm:h-[200px] sm:w-[200px] object-cover shadow-black hover:scale-105 hover:grayscale transition-all"
               src={
                 artist?.images.length === 0
                   ? "https://thumbs.dreamstime.com/t/cantante-cl%C3%A1sico-desconocido-que-canta-en-estudio-117106986.jpg"
@@ -54,13 +57,11 @@ const ArtistDetail = () => {
             <h4 className="line-clamp-1  font-semibold sm:text-xl">
               {artist?.name}
             </h4>
-            <h5>
-              Seguidores:{" "}
-              <span className="text-[#CCCC]">
-                {artist?.followers.total} oyentes
-              </span>
+            <h5 className="font-semibold">
+              {artist?.followers.total}{" "}
+              <span className="font-normal">oyentes mensuales</span>
             </h5>
-            <h5 className="flex items-center gap-1">
+            <h5 className="flex items-center gap-1 font-semibold">
               Popularidad:
               <Rating
                 className="flex items-center"
@@ -72,12 +73,12 @@ const ArtistDetail = () => {
               />
             </h5>
             <div className="grid">
-              <h5>Géneros:</h5>
+              <h5 className="font-semibold">Géneros:</h5>
               <ul className="mt-2 flex gap-2 justify-start uppercase font-semibold sm:gap-3 flex-wrap">
                 {artist?.genres.map((genre) => (
-                  <li key={genre}>
+                  <li className="hover:scale-110 transition-all " key={genre}>
                     <span
-                      className={`hover:hover:bg-[#886AE2] py-1 transition-all ${
+                      className={`hover:hover:bg-[#886AE2] py-1 transition-all  ${
                         genre.length > 2 ? "text-[11px]" : "text-sm"
                       } px-2 rounded-full border-secondary border`}
                     >
@@ -89,7 +90,8 @@ const ArtistDetail = () => {
             </div>
           </div>
         </div>
-        <section className="mt-5 w-full ">
+
+        <section className="mt-5 w-full">
           <h3 className="mb-3 font-semibold sm:text-base tracking-wider uppercase w-full">
             Otros discos del artista:
           </h3>
@@ -102,7 +104,7 @@ const ArtistDetail = () => {
             {artist &&
               artist?.albums.slice(0.5).map((album) => (
                 <SwiperSlide key={album.id}>
-                  <article>
+                  <article className="h-[250px] overflow-hidden">
                     <div className="rounded-lg overflow-hidden shadow-lg">
                       <img
                         className="object-cover h-[146px]"
@@ -126,6 +128,7 @@ const ArtistDetail = () => {
                 </SwiperSlide>
               ))}
           </Swiper>
+          {trackToPlay && <PlaySpotify idTrackToPlay={trackToPlay} />}
         </section>
       </section>
       <section className=" ">
@@ -134,7 +137,13 @@ const ArtistDetail = () => {
         </h3>
         {artist &&
           topSongs.map((topSong) => (
-            <TrackCard track={topSong} key={topSong.id} showBtnAdd />
+            <TrackCard
+              track={topSong}
+              key={topSong.id}
+              showBtnAdd
+              showBtnPlay
+              setTrackToPlay={setTrackToPlay}
+            />
           ))}
       </section>
     </PrincipalLayout>

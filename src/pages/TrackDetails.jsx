@@ -3,11 +3,21 @@ import { Link, useParams } from "react-router-dom";
 import TrackCard from "../components/shared/TrackCard";
 import PrincipalLayout from "../layouts/PrincipalLayout";
 import { axiosMusic } from "../utils/configAxios";
+import PlaySpotify from "../components/shared/PlaySpotify";
+import { PlayIcon, PlusIcon } from "../svg/Svgs";
+import { addTrack } from "../store/slices/playlistCart.slice";
+import { useDispatch } from "react-redux";
 
 const TrackDetails = () => {
   const [track, setTrack] = useState(null);
   const { id } = useParams();
+  const [trackToPlay, setTrackToPlay] = useState("");
+  const dispatch = useDispatch();
   const relatedSongs = track?.relatedSongs;
+
+  const handleAddTrack = () => {
+    dispatch(addTrack(track));
+  };
 
   useEffect(() => {
     axiosMusic
@@ -33,7 +43,7 @@ const TrackDetails = () => {
           <div className="link  h-full w-full flex items-center  justify-center mx-auto relative">
             <img
               className=" rounded-lg overflow-hidden 
-              shadow-md shadow-black"
+              shadow-md shadow-black hover:scale-105 hover:grayscale transition-all"
               src={track?.album.images[0].url}
               alt=""
             />
@@ -63,16 +73,34 @@ const TrackDetails = () => {
               Fecha de salida:{" "}
               <span className="text-[#CCCC]">{track?.album.release_date}</span>
             </h6>
+            <div className="flex gap-1">
+              <button
+                onClick={() => setTrackToPlay(track.id)}
+                className="w-fit group"
+              >
+                <PlayIcon />
+              </button>
+              <button onClick={handleAddTrack} className="w-fit group">
+                <PlusIcon />
+              </button>
+            </div>
           </div>
         </div>
       </section>
       <section className="mt-5">
+        {trackToPlay && <PlaySpotify idTrackToPlay={trackToPlay} />}
         <h3 className="my-5 font-semibold sm:text-base tracking-wider uppercase">
           Recomendaciones:
         </h3>
         {track &&
           relatedSongs.map((relatedSong) => (
-            <TrackCard key={relatedSong.id} track={relatedSong} showBtnAdd />
+            <TrackCard
+              key={relatedSong.id}
+              track={relatedSong}
+              showBtnAdd
+              showBtnPlay
+              setTrackToPlay={setTrackToPlay}
+            />
           ))}
       </section>
     </PrincipalLayout>

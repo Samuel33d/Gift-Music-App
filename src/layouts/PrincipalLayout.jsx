@@ -52,8 +52,8 @@ const PrincipalLayout = ({ children }) => {
         </div>
       </header>
 
-      <section className="py-14 px-2 overflow-y-auto">
-        <main className="relative mx-auto bg-primary-dark py-8 sm:px-10 px-3 rounded-[30px] max-w-[560px] transition-all ">
+      <section className="py-14 px-2 overflow-y-auto overflow-x-hidden">
+        <main className="relative mx-auto bg-primary-dark py-8 sm:px-10 px-3 rounded-[30px] max-w-[560px] transition-all overflow-hidden">
           {children}
         </main>
         <PopUpMenu isPopUpMenuShow={isPopUpMenuShow} />

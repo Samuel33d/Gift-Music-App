@@ -6,6 +6,8 @@ import PlaySpotify from "../components/shared/PlaySpotify";
 import TrackCard from "../components/shared/TrackCard";
 import PublicLayout from "../layouts/PublicLayout";
 import { axiosMusic } from "../utils/configAxios";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const PlaylistPublic = () => {
   const [playlist, setPlaylist] = useState(null);
@@ -14,6 +16,9 @@ const PlaylistPublic = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const { id } = useParams();
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   useEffect(() => {
     axiosMusic
       .get(`/api/playlists/${id}`)

@@ -4,10 +4,12 @@ import PrincipalLayout from "../layouts/PrincipalLayout";
 import { SearchIcon } from "../svg/Svgs";
 import { axiosMusic } from "../utils/configAxios";
 import { IconLoader2 } from "@tabler/icons-react";
+import PlaySpotify from "../components/shared/PlaySpotify";
 
 const Home = () => {
   const [searchTrack, setSearchTrack] = useState([]);
   const [tracksRecommendations, setTracksRecommendations] = useState([]);
+  const [trackToPlay, setTrackToPlay] = useState("");
 
   useEffect(() => {
     axiosMusic
@@ -35,7 +37,9 @@ const Home = () => {
         className=" bg-white/5 p-3 px-4 rounded-lg flex gap-2 sm:gap-4 items-center justify-between transition-all shadow-md"
       >
         {tracksRecommendations.length === 0 ? (
-          <IconLoader2 className="absolute animate-spin  " />
+          <button className="flex items-center h-full mr-5">
+            <IconLoader2 className="absolute animate-spin  " />
+          </button>
         ) : (
           <button type="submit">
             <SearchIcon />
@@ -63,8 +67,10 @@ const Home = () => {
         </select>
       </form>
 
+      {trackToPlay && <PlaySpotify idTrackToPlay={trackToPlay} />}
       <TrackList
         tracks={searchTrack.length === 0 ? tracksRecommendations : searchTrack}
+        setTrackToPlay={setTrackToPlay}
       />
     </PrincipalLayout>
   );

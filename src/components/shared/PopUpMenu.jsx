@@ -12,7 +12,7 @@ const PopUpMenu = ({ isPopUpMenuShow }) => {
 
   return (
     <div
-      className={`fixed bg-primary-light grid gap-2 p-4 rounded-md border border-secondary top-20  ${
+      className={`z-50 fixed bg-primary-light grid gap-2 p-4 rounded-md border border-secondary top-20  ${
         isPopUpMenuShow ? "sm:right-32 right-3" : "-right-52 sm:-right-full"
       } transition-all duration-200`}
     >

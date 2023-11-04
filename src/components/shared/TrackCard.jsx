@@ -1,9 +1,8 @@
-import { IconMinus } from "@tabler/icons-react";
+import { IconMinus, IconX } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addTrack, removeTrack } from "../../store/slices/playlistCart.slice";
 import { PlayIcon, PlusIcon } from "../../svg/Svgs";
-import { IconX } from "@tabler/icons-react";
 
 const TrackCard = ({
   track,
@@ -44,7 +43,7 @@ const TrackCard = ({
           </div>
           <div className="flex-1 grid gap-0 sm:gap-1">
             <Link
-              to={`/tracks/${track?.id}`}
+              to={`/tracks/${track?.spotifyId || track?.id}`}
               className={` line-clamp-1 font-semibold hover:text-secondary transition-colors sm:${artistFontSize} `}
             >
               {track?.name}
@@ -57,7 +56,7 @@ const TrackCard = ({
                   <li key={artist.id}>
                     <Link
                       className="hover:text-secondary transition-colors flex  line-clamp-1 text-[#CCCC] 
-sm:text-sm"
+                      sm:text-sm"
                       to={`/artists/${artist.id}`}
                     >
                       {artist.name} {array.length - 1 !== index && ", "}
@@ -68,12 +67,15 @@ sm:text-sm"
           </div>
           <div className="flex items-center  gap-2  mr-2 ">
             {showBtnPlay && (
-              <button onClick={() => setTrackToPlay(track?.spotifyId)}>
+              <button
+                onClick={() => setTrackToPlay(track?.spotifyId || track?.id)}
+                className="group"
+              >
                 <PlayIcon />
               </button>
             )}
             {showBtnAdd && (
-              <button onClick={handleAddTrack}>
+              <button onClick={handleAddTrack} className="group">
                 <PlusIcon />
               </button>
             )}
